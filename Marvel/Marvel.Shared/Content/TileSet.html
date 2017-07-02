@@ -1,0 +1,805 @@
+    <!--http://code.jquery.com/jquery-2.1.4.min.js-->
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" />
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="http://codemirror.net/lib/codemirror.js"></script>
+    <script src="http://codemirror.net/mode/javascript/javascript.js"></script>
+    <script src="http://codemirror.net/addon/hint/javascript-hint.js"></script>
+    <link rel=" stylesheet" type="text/css" href="http://codemirror.net/lib/codemirror.css" />
+    
+    <script type="text/javascript">
+        var canvas;
+        var ctxTiles;
+        var imgTiles;
+        var canvasPosition = { x: 0, y: 0 };
+        var loaded = false;
+        var selectedTile = { x: 0, y: 0, tileIndex: 0 };
+        var selectedLayer = 0;
+        var selectedTileAtMouseDown;
+        var mapLayers = {
+            layers: [{
+                index: 0,
+                map: 'Layer0.png',
+                tileIndexes: []
+            }, {
+                index: 1,
+                map: 'Layer1.png',
+                tileIndexes: []
+            }, {
+                index: 2,
+                map: 'Layer1.png',
+                tileIndexes: []
+            }, {
+                index: 3,
+                map: 'Layer1.png',
+                tileIndexes: []
+            }, {
+                index: 4,
+                map: 'EnemySpriteSheet.png',
+                tileIndexes: []
+            }]
+        };
+
+        var leftButtonDown = false;
+        var level = 1;
+        var frame = 0;
+        var intervalFunction = function () {
+            frame++;
+        };
+        var mouseDownPos = { x: 0, y: 0 };
+
+        $(function () {
+            var loadLevel = function (level) {
+                $('#divMap').html('');
+                $('#cnvMap0').css('background', "url('DefaultTile.png') repeat");
+
+                canvas = document.getElementById("cnvMap0");
+                ctxTiles = canvas.getContext("2d");
+                imgTiles = document.getElementById("imgTiles0");
+
+                frame = 0;
+                if (intervalFunction)
+                    clearInterval(intervalFunction);
+
+                setInterval(intervalFunction, 500);
+
+                $.ajax({
+                    url: "Level0" + level + ".txt",
+                    dataType: "text",
+                    cache: false,
+                    success: function (data) {
+                        var index = 0;
+                        for (var y = 0; y < 118; y++) {
+                            var row = $('<div>').addClass('row').addClass('noselect');
+                            for (var x = 0; x < 16; x++) {
+                                mapLayers.layers[0].tileIndexes.push({ i: index, ti: 0 });
+                                mapLayers.layers[1].tileIndexes.push({ i: index, ti: 0 });
+                                mapLayers.layers[2].tileIndexes.push({ i: index, ti: 0 });
+                                mapLayers.layers[3].tileIndexes.push({ i: index, ti: 0 });
+                                mapLayers.layers[4].tileIndexes.push({ i: index, ti: 0 });
+                                index++;
+                            }
+                        }
+
+                        var fileMapLayers = JSON.parse(data);
+                        for (var layerIndex = 0; layerIndex < mapLayers.layers.length; layerIndex++) {
+                            if (selectedLayer != layerIndex) {
+                                canvas = document.getElementById("cnvMap" + layerIndex);
+                                ctxTiles = canvas.getContext("2d");
+                                imgTiles = document.getElementById("imgTiles" + layerIndex);
+                            }
+
+                            selectedLayer = layerIndex;
+                            $(fileMapLayers.layers[layerIndex].tileIndexes).each(function (index, tile) {
+                                mapLayers.layers[layerIndex].tileIndexes[tile.i] = tile;
+                            });
+
+                            $(mapLayers.layers[layerIndex].tileIndexes).each(function (index, tile) {
+                                if (tile.ti != 0) {
+                                    if (layerIndex == 0) {
+                                        resetAutoTile(tile);
+                                    }
+                                    else if (layerIndex <= 3) {
+                                        resetSimpleTile(tile);
+                                    }
+                                    else if (layerIndex == 4) {
+                                        resetEnemyTile(tile);
+                                    }
+                                }
+                            });
+                        }
+                        selectedLayer = 0;
+                        applyEvents();
+                        timeoutFunction();
+                        loaded = true;
+                    }
+                });
+
+                function applyEvents() {
+                    $('body').mouseup(function (e) {
+                        // Left mouse button was released, clear flag
+                        if (e.which === 1) leftButtonDown = false;
+                    });
+
+                    $('.miniTile').mousedown(function (e) {
+                        // Left mouse button was pressed, set flag
+                        if (e.which === 1) leftButtonDown = true;
+                        if (selectedLayer == 0) {
+                            resetAutoTile(this);
+                        }
+                        else if (selectedLayer <= 3) {
+                            resetSimpleTile(tile);
+                        }
+                        else if (selectedLayer == 4) {
+                            resetEnemyTile(tile);
+                        }
+
+                    });
+
+                    $('.miniTile').mousemove(function (e) {
+                        if (leftButtonDown) {
+                            resetAutoTile(this);
+                        }
+                    });
+
+                    $("input:radio[name=cell]").click(function () {
+                        cellValue = $(this).val();
+                    });
+                }
+
+                var timeoutFunction = function () {
+                    var txt = '';
+                    var tileIndexes = [];
+                    var temp = {
+                        layers: [{
+                            index: 0,
+                            map: 'Layer0.png',
+                            tileIndexes: []
+                        }, {
+                            index: 1,
+                            map: 'Layer1.png',
+                            tileIndexes: []
+                        }, {
+                            index: 2,
+                            map: 'Layer1.png',
+                            tileIndexes: []
+                        }, {
+                            index: 3,
+                            map: 'Layer1.png',
+                            tileIndexes: []
+                        }, {
+                            index: 4,
+                            map: 'EnemySpriteSheet.png',
+                            tileIndexes: []
+                        }]
+                    };
+                    for (var layerIndex = 0; layerIndex < mapLayers.layers.length; layerIndex++) {
+                        $(mapLayers.layers[layerIndex].tileIndexes).each(function (index, tile) {
+                            if (tile.ti != 0) {
+                                temp.layers[layerIndex].tileIndexes.push(tile);
+                            }
+                        });
+                    }
+                    $('#txtMap').html(JSON.stringify(temp));
+                };
+
+                function resetAutoTile(tile) {
+                    var x = tile.i % 16;
+                    var y = parseInt(tile.i / 16);
+
+                    var tileIndex = parseInt(tile.ti);
+                    var nbW = getTile(x - 1, y, tileIndex);
+                    var nbNW = getTile(x - 1, y - 1, tileIndex);
+                    var nbN = getTile(x, y - 1, tileIndex);
+                    var nbNE = getTile(x + 1, y - 1, tileIndex);
+                    var nbE = getTile(x + 1, y, tileIndex);
+                    var nbSE = getTile(x + 1, y + 1, tileIndex);
+                    var nbS = getTile(x, y + 1, tileIndex);
+                    var nbSW = getTile(x - 1, y + 1, tileIndex);
+
+                    selectedTile.tileIndex = tileIndex;
+                    checkNeighbors(tile, selectedTile.tileIndex);
+                    checkNeighbors(nbN, selectedTile.tileIndex);
+                    checkNeighbors(nbS, selectedTile.tileIndex);
+                    checkNeighbors(nbW, selectedTile.tileIndex);
+                    checkNeighbors(nbE, selectedTile.tileIndex);
+                    checkNeighbors(nbNW, selectedTile.tileIndex);
+                    checkNeighbors(nbSW, selectedTile.tileIndex);
+                    checkNeighbors(nbNE, selectedTile.tileIndex);
+                    checkNeighbors(nbSE, selectedTile.tileIndex);
+                }
+
+                function resetSimpleTile(tile) {
+                    var x = tile.i % 16;
+                    var y = parseInt(tile.i / 16);
+
+                    var tileIndex = parseInt(tile.ti);
+                    selectedTile.tileIndex = tileIndex;
+
+                    var sx = 32 * (selectedTile.tileIndex % 16);
+                    var sy = 32 * parseInt(selectedTile.tileIndex / 16);
+                    var dx = x * 32;
+                    var dy = y * 32;
+                    ctxTiles.clearRect(dx, dy, 32, 32);
+                    ctxTiles.drawImage(imgTiles,
+                        sx, sy, 32, 32,
+                        dx, dy, 32, 32);
+                }
+
+                function resetEnemyTile(tile) {                    
+                    var x = tile.i % 16;
+                    var y = parseInt(tile.i / 16);
+
+                    var tileIndex = parseInt(tile.ti);
+                    selectedTile.tileIndex = tileIndex;
+
+                    var sx = 96 * (selectedTile.tileIndex % 4);
+                    var sy = 128 * parseInt(selectedTile.tileIndex / 4);
+                    var dx = x * 32;
+                    var dy = y * 32;
+                    ctxTiles.clearRect(dx, dy, 32, 32);
+                    ctxTiles.drawImage(imgTiles,
+                        sx, sy, 32, 32,
+                        dx, dy, 32, 32);
+                }
+
+                function getTile(x, y, defaultTileIndex) {
+                    var tile = mapLayers.layers[selectedLayer].tileIndexes[x + y * 16];
+                    if (x < 0 || x >= 16 || y < 0 || y >= 118) {
+                        return { i: 0, x: x, y: y, ti: defaultTileIndex };
+                    }
+                    else if (!tile)
+                        return { i: 0, x: -1, y: -1, ti: 0 };
+                    else
+                        return tile;
+                }
+
+                function checkNeighbors(tile, selectedTileIndex) {
+                    if (!tile) {
+                        return;
+                    }
+
+                    var tileIndex = parseInt(tile.ti);
+                    if (tileIndex != selectedTileIndex)
+                        return;
+
+                    var selectedTile = { x: tile.i % 16, y: parseInt(tile.i / 16), tileIndex: parseInt(tile.ti) };
+
+                    var x = tile.i % 16;
+                    var y = parseInt(tile.i / 16);
+
+                    var nbW = getTile(x - 1, y, tileIndex);
+                    var nbNW = getTile(x - 1, y - 1, tileIndex);
+                    var nbN = getTile(x, y - 1, tileIndex);
+                    var nbNE = getTile(x + 1, y - 1, tileIndex);
+                    var nbE = getTile(x + 1, y, tileIndex);
+                    var nbSE = getTile(x + 1, y + 1, tileIndex);
+                    var nbS = getTile(x, y + 1, tileIndex);
+                    var nbSW = getTile(x - 1, y + 1, tileIndex);
+
+                    var tileOffset = { x: 0, y: 0 };
+
+                    if (nbNW.ti != tileIndex && nbN.ti != tileIndex && nbW.ti != tileIndex)
+                        tileOffset = { x: 0, y: 2 };
+                    else if (nbN.ti == tileIndex && nbW.ti != tileIndex)
+                        tileOffset = { x: 0, y: 3 };
+                    else if (nbN.ti != tileIndex && nbW.ti == tileIndex)
+                        tileOffset = { x: 1, y: 2 };
+                    else if (nbNW.ti != tileIndex && nbN.ti == tileIndex && nbW.ti == tileIndex)
+                        tileOffset = { x: 2, y: 0 };
+                    else if (nbNW.ti == tileIndex && nbN.ti == tileIndex && nbW.ti == tileIndex)
+                        tileOffset = { x: 1, y: 3 };
+
+                    drawMiniTile(selectedTile, tileOffset, 'NW');
+
+                    tileOffset = { x: 3, y: 2 };
+
+                    if (nbNE.ti != tileIndex && nbN.ti != tileIndex && nbE.ti != tileIndex)
+                        tileOffset = { x: 3, y: 2 };
+                    else if (nbN.ti == tileIndex && nbE.ti != tileIndex)
+                        tileOffset = { x: 3, y: 3 };
+                    else if (nbN.ti != tileIndex && nbE.ti == tileIndex)
+                        tileOffset = { x: 1, y: 2 };
+                    else if (nbNE.ti != tileIndex && nbN.ti == tileIndex && nbE.ti == tileIndex)
+                        tileOffset = { x: 3, y: 0 };
+                    else if (nbNE.ti == tileIndex && nbN.ti == tileIndex && nbE.ti == tileIndex)
+                        tileOffset = { x: 2, y: 3 };
+
+                    drawMiniTile(selectedTile, tileOffset, 'NE');
+
+                    tileOffset = { x: 0, y: 5 };
+
+                    if (nbSW.ti != tileIndex && nbS.ti != tileIndex && nbW.ti != tileIndex)
+                        tileOffset = { x: 0, y: 5 };
+                    else if (nbS.ti == tileIndex && nbW.ti != tileIndex)
+                        tileOffset = { x: 0, y: 4 };
+                    else if (nbS.ti != tileIndex && nbW.ti == tileIndex)
+                        tileOffset = { x: 1, y: 5 };
+                    else if (nbSW.ti != tileIndex && nbS.ti == tileIndex && nbW.ti == tileIndex)
+                        tileOffset = { x: 2, y: 1 };
+                    else if (nbSW.ti == tileIndex && nbS.ti == tileIndex && nbW.ti == tileIndex)
+                        tileOffset = { x: 1, y: 4 };
+
+                    drawMiniTile(selectedTile, tileOffset, 'SW');
+
+                    tileOffset = { x: 3, y: 5 };
+
+                    if (nbSE.ti != tileIndex && nbS.ti != tileIndex && nbE.ti != tileIndex)
+                        tileOffset = { x: 3, y: 5 };
+                    else if (nbS.ti == tileIndex && nbE.ti != tileIndex)
+                        tileOffset = { x: 3, y: 4 };
+                    else if (nbS.ti != tileIndex && nbE.ti == tileIndex)
+                        tileOffset = { x: 2, y: 5 };
+                    else if (nbSE.ti != tileIndex && nbS.ti == tileIndex && nbE.ti == tileIndex)
+                        tileOffset = { x: 3, y: 1 };
+                    else if (nbSE.ti == tileIndex && nbS.ti == tileIndex && nbE.ti == tileIndex)
+                        tileOffset = { x: 2, y: 4 };
+
+                    drawMiniTile(selectedTile, tileOffset, 'SE');
+                }
+
+                function drawMiniTile(selectedTile, sourceTileOffset, miniTileCode) {
+                    var destTileOffset = { x: 0, y: 0 };
+
+                    switch (miniTileCode) {
+                        case 'NW':
+                            destMiniTileOffset = { x: 0, y: 0 };
+                            break;
+                        case 'NE':
+                            destMiniTileOffset = { x: 1, y: 0 };
+                            break;
+                        case 'SW':
+                            destMiniTileOffset = { x: 0, y: 1 };
+                            break;
+                        case 'SE':
+                            destMiniTileOffset = { x: 1, y: 1 };
+                            break;
+                    }
+
+                    var sx = 64 * (selectedTile.tileIndex % 8) + sourceTileOffset.x * 16;
+                    var sy = 96 * parseInt(selectedTile.tileIndex / 8) + sourceTileOffset.y * 16;
+                    var dx = (selectedTile.x) * 32 + destMiniTileOffset.x * 16;
+                    var dy = (selectedTile.y) * 32 + destMiniTileOffset.y * 16;
+
+                    ctxTiles.clearRect(dx, dy, 16, 16);
+                    ctxTiles.drawImage(imgTiles,
+                        sx, sy, 16, 16,
+                        dx, dy, 16, 16);
+                }
+
+                window.addEventListener('mousedown', function (e) {
+                    var pos = getMousePos(canvas, e);
+                    mouseDownPos = { x: parseInt(pos.x / 32), y: parseInt(pos.y / 32) };
+                    selectedTileAtMouseDown = selectedTile; //{ x: selectedTile.x, y: selectedTile.y };
+                    setCanvasPosition(pos, true);
+                }, false);
+
+                window.addEventListener('mousemove', convertWindowPosToCanvasPos, false);
+
+                function convertWindowPosToCanvasPos(e) {
+                    var pos = getMousePos(canvas, e);
+                    var isMouseDown = (e.which == 1);
+                    if (isMouseDown) {
+                        if (selectedLayer > 0
+                            && selectedLayer < 4
+                            && selectedTile.x > 0
+                            && selectedTile.y > 0) {
+                            var newCanvasPos = { x: parseInt(pos.x / 32), y: parseInt(pos.y / 32) };
+                            var offset = { x: newCanvasPos.x - mouseDownPos.x, y: newCanvasPos.y - mouseDownPos.y };
+                            mouseDownPos = newCanvasPos;
+                            selectedTile.x = selectedTileAtMouseDown.x + offset.x;
+                            selectedTile.y = selectedTileAtMouseDown.y + offset.y;
+                            selectedTile.tileIndex = selectedTileAtMouseDown.x + selectedTileAtMouseDown.y * 16;
+                        }
+                        setCanvasPosition(pos, isMouseDown);
+                    }
+                }
+
+                function setCanvasPosition(pos, isMouseDown) {
+                    var newCanvasPos = { x: parseInt(pos.x / 32), y: parseInt(pos.y / 32) };
+                    
+                    if (((newCanvasPos.x != canvasPosition.x)
+                        || (newCanvasPos.y != canvasPosition.y)) &&
+                        !(newCanvasPos.x < 0 || newCanvasPos.x >= 16 || newCanvasPos.y < 0 || newCanvasPos.y >= 118)) {
+
+                        var tile = mapLayers.layers[selectedLayer].tileIndexes[newCanvasPos.x + newCanvasPos.y * 16];
+                        if (tile && isMouseDown && tile.ti != selectedTile.tileIndex) {
+                            canvasPosition = newCanvasPos;
+
+                            tile.ti = selectedTile.tileIndex;
+
+                            if (selectedLayer == 0) {
+                                resetAutoTile(tile);
+                            }
+                            else if (selectedLayer <= 3) {
+                                resetSimpleTile(tile);
+                            }
+                            else if (selectedLayer == 4) {
+                                resetEnemyTile(tile);
+                            }
+
+                            if (loaded) {
+                                clearTimeout(timeoutFunction);
+                                setTimeout(timeoutFunction, 2000);
+                            }
+                        }
+
+                    }
+                }
+
+                function getMousePos(canvas, evt) {
+                    var rect = canvas.getBoundingClientRect();
+                    return {
+                        x: evt.clientX - rect.left,
+                        y: evt.clientY - rect.top
+                    };
+                }
+
+        }
+
+            loadLevel(level);
+            selectedLayer = 0;
+            $("input:radio[name=level]").click(function () {
+                level = parseInt($(this).val());
+                loadLevel(level);
+            });
+
+            $('#imgTiles0').click(function (e) {
+                var parentOffset = $(this).parent().offset();
+                var x = parseInt((e.pageX - parentOffset.left) / 64);
+                var y = parseInt((e.pageY - parentOffset.top) / 96);
+                selectedTile = { x: x, y: y, tileIndex: x + y * 8 };
+                $('#cursor0').css('left', (x * 64) + 'px');
+                $('#cursor0').css('top', (y * 96) + 'px');
+            });
+
+            $('#imgTiles0').mousemove(function (e) {
+                var parentOffset = $(this).parent().offset();
+                var x = parseInt((e.pageX - parentOffset.left) / 16);
+                var y = parseInt((e.pageY - parentOffset.top) / 16);
+            });
+
+            var imgTilesClickFunction = function (e) {
+                var parentOffset = $(this).parent().offset();
+                var tileScroll = $('#pnlLayer' + selectedLayer + ' .TileContainer').scrollTop();
+                var x = parseInt((e.pageX - parentOffset.left) / 32);
+                var y = parseInt((tileScroll + e.pageY - parentOffset.top) / 32);
+                selectedTile = { x: x, y: y, tileIndex: x + y * 16 };
+                //y = parseInt((e.pageY - parentOffset.top) / 32);
+                $('#cursor' + selectedLayer).css('left', (x * 32) + 'px').css('top', (y * 32) + 'px');
+            };
+
+            $('#imgTiles1').click(imgTilesClickFunction);
+            $('#imgTiles2').click(imgTilesClickFunction);
+            $('#imgTiles3').click(imgTilesClickFunction);
+
+            $('#imgTiles4').click(function (e) {
+                var parentOffset = $(this).parent().offset();
+                var tileScroll = $('#pnlLayer' + selectedLayer + ' .TileContainer').scrollTop();
+                var x = parseInt((e.pageX - parentOffset.left) / 96);
+                var y = parseInt((tileScroll + e.pageY - parentOffset.top) / 128);
+                selectedTile = { x: x, y: y, tileIndex: x + y * 4 };
+                console.log(JSON.stringify(selectedTile));
+                $('#cursor4').css('left', (x * 96) + 'px');
+                $('#cursor4').css('top', (y * 128) + 'px');
+            });
+
+
+            $('.tab-group-left').click(function (ev, li) {
+                $(ev.target.parentElement).parent().find('li').removeClass('active');
+                $(ev.target.parentElement).addClass('active');
+                var selectedTab = $(ev.target.parentElement).index();
+                $('.mapContainer').hide();
+                $('.properties').hide();
+                switch (selectedTab) {
+                    case 0:
+                        $('.mapContainer').show();
+                        break;
+                    case 1:
+                        $('.properties').show();
+                        break;
+                }
+            });
+
+            $('.layers li').click(function (ev, li) {
+                
+                $(ev.target.parentElement).parent().find('li').removeClass('active');
+                $(ev.target.parentElement).addClass('active');
+                selectedLayer = $(ev.target.parentElement).index();
+                $('.pnlLayer').hide();
+                $('#pnlLayer' + selectedLayer).show();
+                $('canvas').hide();
+                for (var i = 0; i <= selectedLayer; i++) {
+                    $('canvas:eq(' + i + ')').show();
+                    canvas = document.getElementById("cnvMap" + selectedLayer);
+                    ctxTiles = canvas.getContext("2d");
+                    imgTiles = document.getElementById("imgTiles" + selectedLayer);
+                }                
+            });
+
+            //var myCodeMirror = CodeMirror(
+            //    $('.properties')[0],
+            //    {
+            //        lineNumbers: false,
+            //        extraKeys: { "Ctrl-Space": "autocomplete" },
+            //        value: "function myScript(){return 100;}\n",
+            //        mode: "javascript",
+            //        globalVars: true
+            //    }
+            //);
+
+            //$('.properties textarea').focus();
+
+            $.get('AJAX/GetFunctions.ashx', function (data) {
+                var myCodeMirror = CodeMirror($('.properties')[0], { value: data, mode: "javascript" });
+            });
+        });
+    </script>
+    <style type="text/css">
+
+        .noselect {
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .miniTile {
+            float: left;
+            opacity: .0;
+            min-width: 16px;
+            min-height: 16px;
+            opacity: .99;
+        }
+
+        .cell {
+            opacity: .9;
+            min-width: 32px;
+            min-height: 32px;
+            max-width: 32px;
+            max-height: 32px;
+            display: inline-block;
+        }
+
+        .vX {
+            background-color: #000000;
+            opacity: .5;
+        }
+
+        .v {
+            background-color: #ffffff;
+            opacity: .99;
+        }
+
+        .va {
+            background: url('EnemySpriteSheet.png') 0 0;
+        }
+
+        .vb {
+            background: url('Enemy2SpriteSheet.png') 0 0;
+        }
+
+        .vc {
+            background: url('Enemy3SpriteSheet.png') 0 0;
+        }
+
+        .vd {
+            background: url('Enemy4SpriteSheet.png') 0 0;
+        }
+
+        .ve {
+            background: url('Enemy5SpriteSheet.png') 0 0;
+        }
+
+        .vf {
+            background: url('Enemy6SpriteSheet.png') 0 0;
+        }
+
+        .vg {
+            background: url('Enemy7SpriteSheet.png') 0 0;
+        }
+
+        .vh {
+            background: url('Enemy8SpriteSheet.png') 0 0;
+        }
+
+        .vi {
+            background: url('Enemy9SpriteSheet.png') 0 0;
+        }
+
+        .vj {
+            background: url('Enemy10SpriteSheet.png') 0 0;
+        }
+
+        .vk {
+            background: url('Enemy11SpriteSheet.png') 0 0;
+        }
+
+        .vl {
+            background: url('Enemy12SpriteSheet.png') 0 0;
+        }
+
+        .vm {
+            background: url('Enemy13SpriteSheet.png') 0 0;
+        }
+
+        .vA {
+            background: url('BonusSpriteSheet.png') -64px 0;
+        }
+
+        .vB {
+            background: url('BonusSpriteSheet.png') -96px 0;
+        }
+
+        .vC {
+            background: url('BonusSpriteSheet.png') -128px 0;
+        }
+
+        .vD {
+            background: url('BonusSpriteSheet.png') -160px 0;
+        }
+
+        .vE {
+            background: url('BonusSpriteSheet.png') -196px 0;
+        }
+
+        .vP {
+            background: url('PowerUpSpriteSheet.png') -32px 0;
+        }
+
+        .vW {
+            background: url('WeaponSpriteSheet.png') -32px 0;
+        }
+
+        .cell.P:before {
+            content: 'P';
+        }
+
+        .cell.W:before {
+            content: 'W';
+        }
+
+        .cell.Space:before {
+            content: '.';
+        }
+
+        .map {
+            position: relative;
+            width: 512px;
+            height: 512px;
+            overflow-x: auto;
+            overflow-y: auto;
+        }
+
+        textarea {
+            width: 100%;
+        }
+
+        .boxsizingBorder {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        .map {
+            background: black;
+            margin-left: 12px;
+        }
+
+        .TileContainer {
+            position: relative;
+            margin-left: 12px;
+            height: 512px;
+            background-color: white;
+            overflow-x: scroll;
+            overflow-y: scroll;
+        }
+
+        /*span {
+            opacity: 1;
+            min-width: 32px;
+            min-height: 32px;
+            display: inline-block;
+        }*/
+
+        input {
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="panel panel-default">
+
+            <div class="row">
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <ul class="tab-group-left nav nav-tabs">
+                            <li role="presentation" class="tab-map active">
+                                <a href="#">Map</a>
+                            </li>
+                            <li role="presentation" class="tab-properties">
+                                <a href="#">Properties</a>
+                            </li>
+                        </ul>
+                        <div class="mapContainer">
+                            <div id="divMap" class="noselect" style="display: none;">
+                            </div>
+                            <div class="map" height="512">
+                                <canvas id="cnvMap0" width="512" height="3776" style="position: absolute; width: 100%; height: 3776px;"></canvas>
+                                <canvas id="cnvMap1" width="512" height="3776" style="position: absolute; width: 100%; height: 3776px;"></canvas>
+                                <canvas id="cnvMap2" width="512" height="3776" style="position: absolute; width: 100%; height: 3776px;"></canvas>
+                                <canvas id="cnvMap3" width="512" height="3776" style="position: absolute; width: 100%; height: 3776px;"></canvas>
+                                <canvas id="cnvMap4" width="512" height="3776" style="position: absolute; width: 100%; height: 3776px;"></canvas>
+                            </div>
+                            <div class="panel-default">
+                                <textarea id="txtMap" class="boxsizingBorder"></textarea>
+                            </div>
+                        </div>
+                        <div class="properties" style="display: none;">
+                            <!--<textarea id="txtFunctions" name="txtFunctions" value=""></textarea>-->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">Layers</div>
+                        <ul class="layers nav nav-tabs">
+                            <li role="presentation" class="active">
+                                <a href="#">Layer 0</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#">Layer 1</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#">Layer 2</a>
+                            </li>                        
+                            <li role="presentation">
+                                <a href="#">Layer 3</a>
+                            </li>
+                            <li role="presentation">
+                                <a href="#">Enemies</a>
+                            </li>
+                        </ul>
+                        <div id="pnlLayer0" class="panel panel-default pnlLayer" style="position: relative;">
+                            <div class="TileContainer noselect">
+                                <img id="imgTiles0" src="Layer0.png" />
+                                <div id="cursor0" style="background-color: #000000; opacity: .5; width: 64px; height: 96px; left: 0px; top: 0px; position: absolute;"></div>
+                            </div>
+                        </div>
+                        <div id="pnlLayer1" class="panel panel-default pnlLayer" style="display: none; position: relative;">
+                            <div class="TileContainer noselect">
+                                <img id="imgTiles1" src="Layer1.png" style="position: absolute; " />
+                                <div id="cursor1" style="background-color: #000000; opacity: .5; width: 32px; height: 32px; left: 0px; top: 0px; position: absolute;"></div>
+                            </div>
+                        </div>
+                        <div id="pnlLayer2" class="panel panel-default pnlLayer" style="display: none;" position relative;">
+                            <div class="TileContainer noselect">
+                                <img id="imgTiles2" src="Layer1.png" style="position: absolute; " />
+                                <div id="cursor2" style="background-color: #000000; opacity: .5; width: 32px; height: 32px; left: 0px; top: 0px; position: absolute;"></div>
+                            </div>
+                        </div>
+                        <div id="pnlLayer3" class="panel panel-default pnlLayer" style="display: none;" position relative;">
+                            <div class="TileContainer noselect">
+                                <img id="imgTiles3" src="Layer1.png" style="position: absolute; " />
+                                <div id="cursor3" style="background-color: #000000; opacity: .5; width: 32px; height: 32px; left: 0px; top: 0px; position: absolute;"></div>
+                            </div>
+                        </div>
+                        <div id="pnlLayer4" class="panel panel-default pnlLayer" style="display: none;" position relative;">
+                            <div class="TileContainer noselect">
+                                <img id="imgTiles4" src="EnemySpriteSheet.png" style="position: absolute; " />
+                                <div id="cursor4" style="background-color: #000000; opacity: .5; width: 96px; height: 128px; left: 0px; top: 0px; position: absolute;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

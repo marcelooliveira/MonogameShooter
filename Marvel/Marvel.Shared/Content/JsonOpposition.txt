@@ -1,0 +1,61 @@
+﻿{"Enemies":[{
+"EnemyClass": "Enemy",
+"GetEnemyDirection":"",
+"GetBulletDirection":"return GetPlayerDirection()"
+},{
+"EnemyClass": "Enemy2",
+"GetEnemyDirection":"",
+"GetBulletDirection":"return GetPlayerDirection()"
+},{
+"EnemyClass": "Enemy3",
+"GetEnemyDirection":"",
+"GetBulletDirection":"return GetCenterAxisDirection()"
+},{
+"EnemyClass": "Enemy4",
+"GetEnemyDirection":"",
+"GetBulletDirection":"return GetDownDirection()"
+},{
+"EnemyClass": "Enemy5",
+"GetEnemyDirection":"",
+"GetBulletDirection":"return GetLeftDirection()"
+},{
+"EnemyClass": "Enemy6",
+"GetEnemyDirection":"",
+"GetBulletDirection":"return GetRightDirection()"
+},{
+"EnemyClass": "Enemy7",
+"GetEnemyDirection":"",
+"GetBulletDirection":"return GetUpDirection()"
+},{
+"EnemyClass": "Enemy8",
+"GetEnemyDirection":"",
+"GetBulletDirection":"return GetDownDirection()"
+},{
+"EnemyClass": "Enemy9",
+"GetEnemyDirection":"",
+"GetBulletDirection":"return GetLeftDirection()"
+},{
+"EnemyClass": "Enemy10",
+"GetEnemyDirection":"",
+"GetBulletDirection":"return GetRightDirection()"
+},{
+"EnemyClass": "Enemy11",
+"GetEnemyDirection":"",
+"GetBulletDirection":"return GetUpDirection()"
+},{
+"EnemyClass": "Enemy12",
+"GetEnemyDirection":"",
+"GetBulletDirection":"return GetDownDirection()"
+},{
+"EnemyClass": "Enemy13",
+"GetEnemyDirection":"",
+"GetBulletDirection":"return GetLeftDirection()"
+},{
+"EnemyClass": "Enemy14",
+"GetEnemyDirection":"",
+"GetBulletDirection":"return GetRightDirection()"
+},{
+"EnemyClass": "Enemy15",
+"GetEnemyDirection":"",
+"GetBulletDirection":"return GetUpDirection()"
+}]}

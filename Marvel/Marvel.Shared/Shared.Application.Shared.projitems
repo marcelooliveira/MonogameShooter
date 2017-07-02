@@ -1,0 +1,185 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup Label="SharedProjectFile_SccProperties">
+    <SharedProjectFile_ProjectGuid>{692a6d46-b9bd-44d3-a2ba-b19d62964b59}</SharedProjectFile_ProjectGuid>
+    <SharedProjectFile_SccProjectName>SAK</SharedProjectFile_SccProjectName>
+    <SharedProjectFile_SccAuxPath>SAK</SharedProjectFile_SccAuxPath>
+    <SharedProjectFile_SccLocalPath>SAK</SharedProjectFile_SccLocalPath>
+    <SharedProjectFile_SccProvider>SAK</SharedProjectFile_SccProvider>
+  </PropertyGroup>
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>b983c6d0-6d25-4b1e-975c-ca3bd1bfdcbd</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Marvel</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="$(MSBuildThisFileDirectory)App.xaml">
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="$(MSBuildThisFileDirectory)App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Marvel.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GamePage.xaml.cs">
+      <DependentUpon>GamePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="$(MSBuildThisFileDirectory)Resolver.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="$(MSBuildThisFileDirectory)GamePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\KonamiSDSnatcherMSX.spritefont" />
+    <None Include="$(MSBuildThisFileDirectory)Content\NewSpriteFont.spritefont" />
+    <None Include="$(MSBuildThisFileDirectory)Content\SpriteFont1.spritefont" />
+    <None Include="$(MSBuildThisFileDirectory)Content\SpriteFont1.xnb" />
+    <None Include="$(MSBuildThisFileDirectory)Content\Untitled.tmx" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="$(MSBuildThisFileDirectory)Content\2C.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\2E.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\2G.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Bonus.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\BonusSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Boss1HitSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Boss1SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Boss2HitSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Boss2SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Boss3HitSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Boss3SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Boss4HitSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Boss4SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Boss5HitSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Boss5SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Boss6HitSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Boss6SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Boss7HitSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Boss7SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Boss8HitSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Boss8SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\BossDestructionSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\BossExplosion.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\BossHit.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\BossHit.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\BossSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\BossTheme.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\BulletShooting.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\BulletSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Cheers.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Click.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Click.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Clock.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Clock.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Combo.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Combo.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\ComboSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\CursorSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Death.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\DefaultTile.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Destruction.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\DestructionSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Enemy10SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Enemy11SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Enemy12SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Enemy13SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Enemy1SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Enemy2SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Enemy3SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Enemy4SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Enemy5SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Enemy6SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Enemy7SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Enemy8SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Enemy9SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\EnemyBullet2SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\EnemyBullet3SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\EnemyBullet4SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\EnemyBulletSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\EnemySpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\FinishLevel.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Fire.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\FrozenTiles.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GameFrame.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\GameOver.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Intro.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\JsonOpposition.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Knightmare MSX Theme.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\KonamiSDSnatcherMSX.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Layer0.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Layer1.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Level.html" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Level01.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Level01.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Level01Transparent.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Level1.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Level1.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Level2.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\LoveSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map01 - Copia.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map01.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map01.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map02.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map02.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map03.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map03.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map04.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map04.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map05.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map05.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map06.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map06.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map07.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map07.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map08.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Map08.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Path01.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Path02.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Path03.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Path04.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Path05.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Path06.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Path07.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Path08.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\pause.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PlayerBullet1Shooting.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PlayerBullet1SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PlayerBullet2Shooting.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PlayerBullet2SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PlayerBullet3SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PlayerBullet4Shooting.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PlayerBullet4SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PlayerBullet51SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PlayerBullet5Shooting.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PlayerBullet5SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PlayerBullet6Shooting.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PlayerBullet6SpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PlayerBulletSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PlayerDestructionSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PlayerSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PowerUp.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PowerUp.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PowerUpSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\PrincessSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Sem título.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\ShadowSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\splitSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Start.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Super-Contra-NES.ttf" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\TheEnd.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\tiles.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\TileSet.html" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Title.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\unpause.mp3" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Untitled.txt" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\Weapon.wav" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\WeaponSpriteSheet.png" />
+    <Content Include="$(MSBuildThisFileDirectory)Content\WeaponsSpriteSheet.png" />
+  </ItemGroup>
+</Project>

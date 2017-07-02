@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <MinimumVisualStudioVersion>12.0</MinimumVisualStudioVersion>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{91FBC714-865A-4EEC-A12E-E4E130247096}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BaseVerticalShooter.Core</RootNamespace>
+    <AssemblyName>BaseVerticalShooter.Core</AssemblyName>
+    <DefaultLanguage>en-US</DefaultLanguage>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{786C830F-07A1-408B-BD7F-6EE04809D6DB};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <TargetFrameworkProfile>Profile151</TargetFrameworkProfile>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <SccProjectName>SAK</SccProjectName>
+    <SccLocalPath>SAK</SccLocalPath>
+    <SccAuxPath>SAK</SccAuxPath>
+    <SccProvider>SAK</SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="BossMovement.cs" />
+    <Compile Include="ContentHelper.cs" />
+    <Compile Include="FrameCounter.cs" />
+    <Compile Include="GameModel\BaseBoss.cs" />
+    <Compile Include="GameModel\BaseEnemy.cs" />
+    <Compile Include="GameModel\BaseMap.cs" />
+    <Compile Include="GameModel\BasePlayer.cs" />
+    <Compile Include="GameModel\Bonus.cs" />
+    <Compile Include="GameModel\Boss.cs" />
+    <Compile Include="GameModel\Bullet.cs" />
+    <Compile Include="GameModel\Camera2D.cs" />
+    <Compile Include="GameModel\CharacterState.cs" />
+    <Compile Include="GameModel\CollisionManager.cs" />
+    <Compile Include="GameModel\BaseEnemies.cs" />
+    <Compile Include="GameModel\Enemy.cs" />
+    <Compile Include="GameModel\EnemyBullet.cs" />
+    <Compile Include="GameModel\EnemyMovementStrategies\BaseBumpAndTurnClockwise.cs" />
+    <Compile Include="GameModel\EnemyMovementStrategies\BumpAndTurnCounterClockwise.cs" />
+    <Compile Include="GameModel\EnemyMovementStrategies\BumpAndTurnClockwise.cs" />
+    <Compile Include="GameModel\EnemyMovementStrategies\IEnemyMovement.cs" />
+    <Compile Include="GameModel\EnemyMovementStrategies\StraightShot.cs" />
+    <Compile Include="GameModel\EnemyMovementStrategies\SattelliteBullet.cs" />
+    <Compile Include="GameModel\GameResources.cs" />
+    <Compile Include="GameModel\IBaseMap.cs" />
+    <Compile Include="GameModel\IBasePlayer.cs" />
+    <Compile Include="GameModel\IDirectionable.cs" />
+    <Compile Include="GameModel\IEnemy.cs" />
+    <Compile Include="GameModel\IMap.cs" />
+    <Compile Include="GameModel\IPhysicalObject.cs" />
+    <Compile Include="GameModel\Map.cs" />
+    <Compile Include="GameModel\PhysicalObject.cs" />
+    <Compile Include="GameModel\Player.cs" />
+    <Compile Include="GameModel\PlayerBullet.cs" />
+    <Compile Include="GameModel\PlayerBullets.cs" />
+    <Compile Include="GameModel\PowerUp.cs" />
+    <Compile Include="GameModel\Princess.cs" />
+    <Compile Include="GameModel\View.cs" />
+    <Compile Include="GameModel\ViewStateBase.cs" />
+    <Compile Include="GameModel\ViewStateGameOver.cs" />
+    <Compile Include="GameModel\ViewStateIntro.cs" />
+    <Compile Include="GameModel\ViewStateLoading.cs" />
+    <Compile Include="GameModel\ViewStateMenu.cs" />
+    <Compile Include="GameModel\ViewStatePlaying.cs" />
+    <Compile Include="GameModel\ViewStateShowLevel.cs" />
+    <Compile Include="GameModel\ViewStateTheEnd.cs" />
+    <Compile Include="GameModel\Weapon.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="GameSettings.cs" />
+    <Compile Include="IBaseVerticalShooterGame.cs" />
+    <Compile Include="IContentHelper.cs" />
+    <Compile Include="Input\InputCodeManager.cs" />
+    <Compile Include="IReviewHelper.cs" />
+    <Compile Include="JsonModels\JsonMap.cs" />
+    <Compile Include="JsonModels\JsonOpposition.cs" />
+    <Compile Include="NewMessenger.cs" />
+    <Compile Include="RandomProvider.cs" />
+    <Compile Include="Resolver.cs" />
+    <Compile Include="ReviewHelper.cs" />
+    <Compile Include="Input\IScreenPad.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Input\ScreenPad.cs" />
+    <Compile Include="Input\ScreenPadState.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Scripting\FunctionExecutor.cs" />
+    <Compile Include="Scripting\IFunctionExecutor.cs" />
+    <Compile Include="Scripting\ILineProcessor.cs" />
+    <Compile Include="Scripting\IScriptProcessor.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Scripting\LineProcessor.cs" />
+    <Compile Include="Scripting\ScriptProcessor.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Autofac, Version=3.5.0.0, Culture=neutral, PublicKeyToken=17863af14b0044da, processorArchitecture=MSIL">
+      <HintPath>..\packages\Autofac.3.5.2\lib\portable-net4+sl5+netcore45+wpa81+wp8+MonoAndroid1+MonoTouch1\Autofac.dll</HintPath>
+    </Reference>
+    <Reference Include="MonoGame.Framework">
+      <HintPath>..\..\..\..\..\..\Program Files (x86)\MonoGame\v3.0\Assemblies\WindowsUniversal\MonoGame.Framework.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\portable-net45+win8+wp8+wpa81\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
