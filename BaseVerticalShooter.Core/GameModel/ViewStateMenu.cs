@@ -37,7 +37,7 @@ namespace BaseVerticalShooter.Core.GameModel
         public override void LoadContent(IContentHelper contentHelper)
         {
             base.LoadContent(contentHelper);
-            startSong = contentHelper.GetContent<Song>("Start");
+            startSong = contentHelper.GetContent<Song>("StartNew");
             clickSoundEffectInstance = contentHelper.GetSoundEffectInstance("Click");
         }
 

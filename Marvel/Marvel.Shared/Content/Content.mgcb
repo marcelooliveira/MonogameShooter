@@ -841,72 +841,6 @@
 /processorParam:TextureFormat=Color
 /build:BonusSpriteSheet.png
 
-#begin unpause.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:unpause.mp3
-
-#begin TheEnd.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Low
-/build:TheEnd.mp3
-
-#begin pause.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:pause.mp3
-
-#begin Intro.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Intro.mp3
-
-#begin GameOver.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:GameOver.mp3
-
-#begin Fire.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Fire.mp3
-
-#begin FinishLevel.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:FinishLevel.mp3
-
-#begin Death.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Death.mp3
-
-#begin Combo.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Combo.mp3
-
-#begin BossTheme.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Low
-/build:BossTheme.mp3
-
-#begin Bonus.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Bonus.mp3
-
 #begin Weapon.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
@@ -949,36 +883,6 @@
 /processorParam:Quality=Best
 /build:BulletShooting.wav
 
-#begin Level1.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Level1.mp3
-
-#begin PowerUp.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:PowerUp.mp3
-
-#begin BossHit.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:BossHit.mp3
-
-#begin Cheers.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Cheers.mp3
-
-#begin Start.mp3
-/importer:Mp3Importer
-/processor:SongProcessor
-/processorParam:Quality=Best
-/build:Start.mp3
-
 #begin CursorSpriteSheet.png
 /importer:TextureImporter
 /processor:TextureProcessor
@@ -990,18 +894,6 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:CursorSpriteSheet.png
-
-#begin Click.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Click.mp3
-
-#begin Clock.mp3
-/importer:Mp3Importer
-/processor:SoundEffectProcessor
-/processorParam:Quality=Best
-/build:Clock.mp3
 
 #begin BossExplosion.wav
 /importer:WavImporter
@@ -1051,4 +943,130 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Shooter.spritefont
+
+#begin StartNew.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:StartNew.wma
+
+#begin Bonus.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Bonus.wma
+
+#begin BossHit.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:BossHit.wma
+
+#begin BossTheme.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:BossTheme.wma
+
+#begin Cheers.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Cheers.wma
+
+#begin Click.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Click.wma
+
+#begin Clock.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Clock.wma
+
+#begin Combo.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Combo.wma
+
+#begin Death.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Death.wma
+
+#begin FinishLevel.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:FinishLevel.wma
+
+#begin Fire.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Fire.wma
+
+#begin GameOver.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:GameOver.wma
+
+#begin Intro.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Intro.wma
+
+#begin Knightmare MSX Theme.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Knightmare MSX Theme.wma
+
+#begin Level2.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Level2.wma
+
+#begin pause.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:pause.wma
+
+#begin PowerUp.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:PowerUp.wma
+
+#begin Start.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Start.wma
+
+#begin unpause.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:unpause.wma
+
+#begin TheEnd.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:TheEnd.wma
+
+#begin Level1.wma
+/importer:WmaImporter
+/processor:SongProcessor
+/processorParam:Quality=Best
+/build:Level1.wma
 
