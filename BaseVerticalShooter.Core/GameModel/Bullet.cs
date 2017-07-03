@@ -59,7 +59,8 @@ namespace Shooter.GameModel
         public override void LoadContent(IContentHelper contentHelper)
         {
             bulletSpriteSheet = bulletSpriteSheet ?? contentHelper.GetContent<Texture2D>(this.GetType().Name + "SpriteSheet");
-            soundEffectInstance = soundEffectInstance ?? contentHelper.GetSoundEffectInstance(this.GetType().Name + "Shooting");
+            //soundEffectInstance = soundEffectInstance ?? contentHelper.GetSoundEffectInstance(this.GetType().Name + "Shooting");
+            soundEffectInstance = soundEffectInstance ?? contentHelper.GetSoundEffectInstance("Fire");
         }
 
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime, int tickCount, float scrollRows)

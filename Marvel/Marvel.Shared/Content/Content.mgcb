@@ -874,7 +874,7 @@
 #begin PlayerBullet1Shooting.wav
 /importer:WavImporter
 /processor:SoundEffectProcessor
-/processorParam:Quality=Best
+/processorParam:Quality=Low
 /build:PlayerBullet1Shooting.wav
 
 #begin BulletShooting.wav

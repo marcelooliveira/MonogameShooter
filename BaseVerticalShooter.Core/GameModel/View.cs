@@ -115,6 +115,7 @@ namespace BaseVerticalShooter.Core.GameModel
             contentHelper.GetContent<Texture2D>("EnemyBullet2SpriteSheet");
             contentHelper.GetContent<Texture2D>("PlayerBullet1SpriteSheet");
             //contentHelper.GetSoundEffectInstance("PlayerBullet1Shooting");
+            contentHelper.GetSoundEffectInstance("Fire");
             contentHelper.GetSoundEffectInstance("Clock");
         }
         
