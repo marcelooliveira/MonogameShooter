@@ -84,7 +84,7 @@ namespace Shooter.GameModel
 
         public virtual void LoadContent(IContentHelper contentHelper)
         {
-            font = font ?? contentHelper.GetContent<SpriteFont>("Super-Contra-NES");
+            font = font ?? contentHelper.GetContent<SpriteFont>("Shooter");
         }
 
         //protected Texture2D GetTexture(IContentHelper contentHelper, string name)

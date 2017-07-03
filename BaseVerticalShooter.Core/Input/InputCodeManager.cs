@@ -80,7 +80,8 @@ namespace BaseVerticalShooter.Core.Input
                 }
             }
 
-            if (GameSettings.Instance.PlatformType == PlatformType.Windows)
+            if (GameSettings.Instance.PlatformType == PlatformType.Windows
+                || GameSettings.Instance.PlatformType == PlatformType.WindowsUniversal)
             {
                 var keyboardState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
                 if (keyboardState.IsKeyDown(xInput.Keys.A))
@@ -143,7 +144,8 @@ namespace BaseVerticalShooter.Core.Input
         private bool KeyboardIsIdle()
         {
             var keyboardIsIdle = true;
-            if (GameSettings.Instance.PlatformType == PlatformType.Windows)
+            if (GameSettings.Instance.PlatformType == PlatformType.Windows
+                || GameSettings.Instance.PlatformType == PlatformType.WindowsUniversal)
             {
                 var keyboardState = Microsoft.Xna.Framework.Input.Keyboard.GetState();
 

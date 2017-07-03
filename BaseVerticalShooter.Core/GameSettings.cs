@@ -71,6 +71,7 @@ namespace BaseVerticalShooter
 
     public enum PlatformType
     {
+        WindowsUniversal = 0,
         WindowsPhone = 1,
         Windows = 2
     }

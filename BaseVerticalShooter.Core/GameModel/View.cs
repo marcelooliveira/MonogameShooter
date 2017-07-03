@@ -97,7 +97,7 @@ namespace BaseVerticalShooter.Core.GameModel
 
             contentHelper.GetContent<Song>("FinishLevel");
             contentHelper.GetContent<Song>("TheEnd");
-            contentHelper.GetContent<SpriteFont>("Super-Contra-NES");
+            contentHelper.GetContent<SpriteFont>("Shooter");
             contentHelper.GetContent<Texture2D>("Title");
             contentHelper.GetContent<Texture2D>("LoveSpriteSheet");
             contentHelper.GetContent<Texture2D>("CursorSpriteSheet");
@@ -114,7 +114,7 @@ namespace BaseVerticalShooter.Core.GameModel
             contentHelper.GetContent<Texture2D>("PlayerBullet1SpriteSheet");
             contentHelper.GetContent<Texture2D>("EnemyBullet2SpriteSheet");
             contentHelper.GetContent<Texture2D>("PlayerBullet1SpriteSheet");
-            contentHelper.GetSoundEffectInstance("PlayerBullet1Shooting");
+            //contentHelper.GetSoundEffectInstance("PlayerBullet1Shooting");
             contentHelper.GetSoundEffectInstance("Clock");
         }
         

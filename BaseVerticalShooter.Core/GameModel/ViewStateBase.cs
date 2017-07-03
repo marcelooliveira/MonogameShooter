@@ -164,7 +164,7 @@ namespace BaseVerticalShooter.Core.GameModel
             this.contentHelper = contentHelper;
             finishLevelSong = contentHelper.GetContent<Song>("FinishLevel");
             theEndSong = contentHelper.GetContent<Song>("TheEnd");
-            font = contentHelper.GetContent<SpriteFont>("Super-Contra-NES");
+            font = contentHelper.GetContent<SpriteFont>("Shooter");
             titleTexture = contentHelper.GetContent<Texture2D>("Title");
             loveTexture = contentHelper.GetContent<Texture2D>("LoveSpriteSheet");
             cursorTexture = contentHelper.GetContent<Texture2D>("CursorSpriteSheet");

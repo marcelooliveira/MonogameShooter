@@ -292,7 +292,8 @@ namespace Shooter.GameModel
             if (GameSettings.Instance.PlatformType == PlatformType.WindowsPhone)
                 stepLength = STEP_LENGTH_WINDOWSPHONE;
 
-            if (GameSettings.Instance.PlatformType == PlatformType.Windows)
+            if (GameSettings.Instance.PlatformType == PlatformType.Windows
+                || GameSettings.Instance.PlatformType == PlatformType.WindowsUniversal)
                 stepLength = STEP_LENGTH_WINDOWS;
             return stepLength;
         }

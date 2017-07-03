@@ -56,7 +56,7 @@ namespace BaseVerticalShooter
 
         public BaseVerticalShooterGame()
         {
-#if WINDOWS_APP
+#if WINDOWS_APP || WINDOWS_UAP
             GameSettings.Instance.PlatformType = PlatformType.Windows;
 #endif
 
@@ -130,7 +130,6 @@ namespace BaseVerticalShooter
         private void ConfigureScreenPad()
         {
             gameFrameTexture = ContentHelper.Instance.GetContent<Texture2D>("GameFrame");
-
             screenPad = new ScreenPad
             (
                 this,

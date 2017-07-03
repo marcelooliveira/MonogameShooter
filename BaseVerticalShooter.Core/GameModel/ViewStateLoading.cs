@@ -35,7 +35,7 @@ namespace BaseVerticalShooter.Core.GameModel
         public override void LoadContent(IContentHelper contentHelper)
         {
             this.contentHelper = contentHelper;
-            font = this.contentHelper.GetContent<SpriteFont>("Super-Contra-NES");
+            font = this.contentHelper.GetContent<SpriteFont>("Shooter");
         }
 
         private void LoadFonts()
